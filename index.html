@@ -485,6 +485,17 @@
             color: var(--highlight);
         }
 
+        /* V3: Stats bar styling */
+        .ttt-stats-bar {
+            text-align: center;
+            font-size: 11px;
+            margin-bottom: 8px;
+            padding: 6px;
+            background: #000080;
+            color: #fff;
+            border: 2px inset white;
+        }
+
         /* === MEMORY GAME === */
         .memory-grid {
             display: grid;
@@ -921,6 +932,11 @@
                 <div class="window-content">
                     <h2>⭕ Classic Tic Tac Toe</h2>
                     <p style="text-align: center;">Play against the computer!</p>
+                    <div class="ttt-stats-bar" id="ttt-stats-bar">
+                        W: <span id="ttt-wins">0</span> |
+                        L: <span id="ttt-losses">0</span> |
+                        D: <span id="ttt-draws">0</span>
+                    </div>
                     <div class="ttt-status" id="ttt-status">Your turn (X)</div>
                     <div class="ttt-board" id="ttt-board"></div>
                     <div style="text-align: center;">
@@ -942,7 +958,8 @@
                     <p style="text-align: center;">Find all matching pairs!</p>
                     <div class="memory-stats" id="memory-stats">
                         Moves: <span id="memory-moves">0</span> |
-                        Pairs: <span id="memory-pairs">0</span>/8
+                        Pairs: <span id="memory-pairs">0</span>/8 |
+                        Best: <span id="memory-best">-</span>
                     </div>
                     <div class="memory-grid" id="memory-grid"></div>
                     <div style="text-align: center; margin-top: 12px;">
@@ -962,7 +979,10 @@
                 <div class="window-content">
                     <h2>🐍 Classic Snake Game</h2>
                     <div class="snake-container">
-                        <div class="snake-score">Score: <span id="snake-score">0</span></div>
+                        <div class="snake-score">
+                            Score: <span id="snake-score">0</span> |
+                            Best: <span id="snake-best">0</span>
+                        </div>
                         <canvas id="snake-canvas" class="snake-canvas" width="200" height="200"></canvas>
                         <p class="snake-controls">Arrow keys or WASD to move</p>
                         <button class="retro-btn primary" onclick="initSnakeGame()">New Game</button>
@@ -1076,7 +1096,11 @@
             const state = {
             theme: 'light',
             visitorCount: parseInt(localStorage.getItem('visitor-count') || '0'),
-            reactionBest: parseInt(localStorage.getItem('reaction-best') || '9999')
+            reactionBest: parseInt(localStorage.getItem('reaction-best') || '9999'),
+            // V3: New game stats
+            snakeHighScore: parseInt(localStorage.getItem('snake-highscore') || '0'),
+            tttStats: JSON.parse(localStorage.getItem('ttt-stats') || '{"wins":0,"losses":0,"draws":0}'),
+            memoryBestMoves: parseInt(localStorage.getItem('memory-best') || '999')
         };
 
         // === NAVIGATION ===
@@ -1294,6 +1318,10 @@
             tttCurrentPlayer = 'X';
             renderTicTacToe();
             document.getElementById('ttt-status').textContent = 'Your turn (X)';
+            // V3: Update stats display
+            document.getElementById('ttt-wins').textContent = state.tttStats.wins;
+            document.getElementById('ttt-losses').textContent = state.tttStats.losses;
+            document.getElementById('ttt-draws').textContent = state.tttStats.draws;
         }
 
         function renderTicTacToe() {
@@ -1317,12 +1345,20 @@
             if (checkTicTacToeWin('X')) {
                 document.getElementById('ttt-status').textContent = 'You win! 🎉';
                 tttGameActive = false;
+                // V3: Save win stat
+                state.tttStats.wins++;
+                localStorage.setItem('ttt-stats', JSON.stringify(state.tttStats));
+                document.getElementById('ttt-wins').textContent = state.tttStats.wins;
                 return;
             }
 
             if (!tttBoard.includes('')) {
                 document.getElementById('ttt-status').textContent = "It's a draw!";
                 tttGameActive = false;
+                // V3: Save draw stat
+                state.tttStats.draws++;
+                localStorage.setItem('ttt-stats', JSON.stringify(state.tttStats));
+                document.getElementById('ttt-draws').textContent = state.tttStats.draws;
                 return;
             }
 
@@ -1342,12 +1378,20 @@
                 if (checkTicTacToeWin('O')) {
                     document.getElementById('ttt-status').textContent = 'Computer wins! 🤖';
                     tttGameActive = false;
+                    // V3: Save loss stat
+                    state.tttStats.losses++;
+                    localStorage.setItem('ttt-stats', JSON.stringify(state.tttStats));
+                    document.getElementById('ttt-losses').textContent = state.tttStats.losses;
                     return;
                 }
 
                 if (!tttBoard.includes('')) {
                     document.getElementById('ttt-status').textContent = "It's a draw!";
                     tttGameActive = false;
+                    // V3: Save draw stat
+                    state.tttStats.draws++;
+                    localStorage.setItem('ttt-stats', JSON.stringify(state.tttStats));
+                    document.getElementById('ttt-draws').textContent = state.tttStats.draws;
                     return;
                 }
             }
@@ -1387,6 +1431,8 @@
             memoryCanFlip = true;
             renderMemoryGame();
             updateMemoryStats();
+            // V3: Show best score
+            document.getElementById('memory-best').textContent = state.memoryBestMoves < 999 ? state.memoryBestMoves : '-';
         }
 
         function renderMemoryGame() {
@@ -1423,6 +1469,12 @@
                     memoryCanFlip = true;
 
                     if (memoryMatched === 8) {
+                        // V3: Save best score (fewest moves)
+                        if (memoryMoves < state.memoryBestMoves) {
+                            state.memoryBestMoves = memoryMoves;
+                            localStorage.setItem('memory-best', memoryMoves);
+                            document.getElementById('memory-best').textContent = memoryMoves;
+                        }
                         showToast('success');
                     }
                 } else {
@@ -1458,6 +1510,7 @@
             snakeScore = 0;
             snakeLastTime = performance.now();
             document.getElementById('snake-score').textContent = '0';
+            document.getElementById('snake-best').textContent = state.snakeHighScore;
             spawnSnakeFood();
             if (snakeGameLoop) cancelAnimationFrame(snakeGameLoop);
             snakeGameLoop = requestAnimationFrame(snakeGameLoopFn);
@@ -1530,7 +1583,15 @@
 
         function gameOverSnake() {
             cancelAnimationFrame(snakeGameLoop);
-            showToast('error');
+            // V3: Save high score
+            if (snakeScore > state.snakeHighScore) {
+                state.snakeHighScore = snakeScore;
+                localStorage.setItem('snake-highscore', snakeScore);
+                document.getElementById('snake-best').textContent = snakeScore;
+                showToast('success');
+            } else {
+                showToast('error');
+            }
         }
 
         // Snake controls

@@ -148,3 +148,26 @@ All styles are inline or in `<style>` blocks. No external CSS. The tradeoff: cac
 
 ### What I Chose NOT to Build
 No responsive images or srcset. Images are fixed-size, often stretched or clipped on mobile. Modern practice would use responsive images. But retro sites didn't know about your phone. The design assumes 800x600. Mobile users get scrollbars. Intentional imperfection preserves the time capsule.
+
+## 🎉 Additional Features (V3)
+
+Three small quality-of-life improvements that add replayability without changing the retro feel:
+
+### Game Statistics Tracking
+**Why added**: Playing games in isolation gets boring. Without persistent records, every session feels like starting from zero.
+
+**What changed**: Added local storage tracking for three games:
+- **Snake**: Now saves your high score and displays it alongside your current score
+- **Tic Tac Toe**: Tracks wins, losses, and draws across all sessions
+- **Memory Match**: Records your best (fewest moves) completion
+
+These stats persist between visits using localStorage, just like visitor counts and reaction times already did.
+
+### Persistent Progress
+**Why added**: Retro games were addictive because you could always see "your initials" on the high score screen. Modern web apps often forget this.
+
+**What changed**: Your best Snake score, fewest Memory moves, and Tic Tac Toe record now survive browser closes. Clear your browser cache to reset.
+
+### Intentionally Rejected: Leaderboards
+I considered adding online leaderboards so you could compete with others. Rejected because it would require a backend, breaking the single-file, no-dependency philosophy. This is a personal time capsule, not a competitive platform. Your stats are yours alone—like writing your high score on an arcade cabinet with a Sharpie.
+
