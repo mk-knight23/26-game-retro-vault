@@ -1,725 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Web Hub - 90s Mini Apps Collection</title>
+    <title>Retro Vault - 90s Time Capsule</title>
     <meta name="description" content="A nostalgic collection of mini apps inspired by 90s web design.">
-    <style>
-        /* === 90s RETRO THEME === */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        /* Skip link for accessibility */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: #000080;
-            color: white;
-            padding: 8px;
-            text-decoration: none;
-            z-index: 1000;
-        }
-        .skip-link:focus {
-            top: 0;
-        }
-
-        :root {
-            --bg-primary: #c0c0c0;
-            --bg-secondary: #ffffff;
-            --border-light: #dfdfdf;
-            --border-dark: #808080;
-            --border-darkest: #404040;
-            --highlight: #000080;
-            --text-primary: #000000;
-            --link-blue: #0000ff;
-            --visited-purple: #800080;
-            --win95-title: #000080;
-            --win95-bg: #c0c0c0;
-            --retro-green: #00ff00;
-            --retro-pink: #ff00ff;
-            --retro-cyan: #00ffff;
-            --retro-yellow: #ffff00;
-        }
-
-        body {
-            font-family: 'MS Sans Serif', 'Segoe UI', Tahoma, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-            background-image:
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
-        }
-
-        /* === WIN95 STYLE HEADER === */
-        header {
-            background: var(--win95-bg);
-            border-bottom: 2px solid var(--border-darkest);
-            padding: 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .title-bar {
-            background: linear-gradient(90deg, var(--win95-title), #1084d0);
-            padding: 4px 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .title-bar h1 {
-            font-size: 14px;
-            font-weight: bold;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .title-bar-icon {
-            width: 16px;
-            height: 16px;
-            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
-            border-radius: 2px;
-        }
-
-        .window-controls {
-            display: flex;
-            gap: 2px;
-        }
-
-        .win-btn {
-            width: 16px;
-            height: 14px;
-            background: var(--bg-primary);
-            border: 2px outset white;
-            font-size: 10px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .win-btn:active {
-            border: 2px inset white;
-        }
-
-        .menu-bar {
-            display: flex;
-            gap: 4px;
-            padding: 4px 8px;
-            border-bottom: 1px solid var(--border-dark);
-        }
-
-        .menu-item {
-            padding: 4px 12px;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        .menu-item:hover {
-            background: var(--highlight);
-            color: white;
-        }
-
-        .back-btn {
-            display: none;
-            padding: 6px 16px;
-            background: var(--bg-primary);
-            border: 2px outset white;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 8px;
-        }
-
-        .back-btn:active {
-            border: 2px inset white;
-        }
-
-        /* === MAIN CONTENT === */
-        main {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        .welcome-banner {
-            background: linear-gradient(90deg, var(--highlight), #800080);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border: 3px outset white;
-            margin-bottom: 20px;
-        }
-
-        .welcome-banner h2 {
-            font-size: 28px;
-            text-shadow: 3px 3px 0 #000;
-            margin-bottom: 8px;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-        }
-
-        .welcome-banner p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        .marquee-container {
-            background: var(--bg-primary);
-            border: 2px inset white;
-            padding: 4px;
-            margin: 10px 0;
-            overflow: hidden;
-        }
-
-        .marquee {
-            white-space: nowrap;
-            animation: marquee 20s linear infinite;
-            font-size: 12px;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* === APP GRID === */
-        .app-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 12px;
-        }
-
-        .app-card {
-            background: var(--bg-primary);
-            border: 2px outset white;
-            padding: 12px;
-            cursor: pointer;
-            text-align: center;
-            transition: none;
-        }
-
-        .app-card:hover {
-            border: 2px inset white;
-        }
-
-        .app-card:active {
-            border: 2px inset white;
-        }
-
-        .app-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            background: var(--bg-secondary);
-            border: 2px outset white;
-        }
-
-        .app-card h3 {
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-
-        .app-card p {
-            font-size: 10px;
-            color: var(--highlight);
-        }
-
-        /* === APP VIEW WINDOW === */
-        .app-view {
-            display: none;
-        }
-
-        .app-view.active {
-            display: block;
-        }
-
-        .window {
-            background: var(--bg-primary);
-            border: 2px outset white;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .window-title {
-            background: linear-gradient(90deg, var(--win95-title), #1084d0);
-            color: white;
-            padding: 4px 8px;
-            font-weight: bold;
-            font-size: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .window-content {
-            padding: 16px;
-            background: var(--bg-secondary);
-            min-height: 200px;
-        }
-
-        .window-content h2 {
-            font-size: 16px;
-            margin-bottom: 12px;
-            color: var(--highlight);
-        }
-
-        .window-content p {
-            font-size: 12px;
-            color: #404040;
-            margin-bottom: 12px;
-        }
-
-        /* === RETRO BUTTON === */
-        .retro-btn {
-            padding: 8px 20px;
-            background: var(--bg-primary);
-            border: 2px outset white;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            font-family: inherit;
-        }
-
-        .retro-btn:active {
-            border: 2px inset white;
-        }
-
-        .retro-btn.primary {
-            background: #800080;
-            color: white;
-        }
-
-        /* === COLOR CHANGER === */
-        .color-display {
-            width: 100%;
-            height: 80px;
-            border: 3px inset white;
-            margin: 12px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .color-code {
-            font-family: 'Courier New', monospace;
-            font-size: 18px;
-            color: var(--highlight);
-            margin-top: 8px;
-        }
-
-        /* === TOAST NOTIFICATIONS === */
-        .toast-container {
-            min-height: 120px;
-            border: 2px inset white;
-            padding: 8px;
-            margin-bottom: 12px;
-            overflow-y: auto;
-            max-height: 150px;
-        }
-
-        .toast {
-            padding: 8px 12px;
-            margin-bottom: 4px;
-            font-size: 11px;
-            border: 2px outset white;
-            animation: slideIn 0.2s;
-        }
-
-        .toast.success { background: #00ff00; color: #000; }
-        .toast.error { background: #ff0000; color: #fff; }
-        .toast.info { background: #ffff00; color: #000; }
-        .toast.warning { background: #ff00ff; color: #fff; }
-
-        @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        /* === COUNTDOWN TIMER === */
-        .countdown-display {
-            font-size: 48px;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            text-align: center;
-            padding: 20px;
-            background: #000;
-            color: var(--retro-green);
-            border: 4px inset white;
-            margin: 12px 0;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .countdown-input {
-            width: 100px;
-            padding: 6px;
-            border: 2px inset white;
-            font-family: inherit;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        .countdown-controls {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        /* === DARK MODE === */
-        .theme-preview {
-            border: 2px inset white;
-            padding: 20px;
-            margin: 12px 0;
-            text-align: center;
-        }
-
-        .toggle-switch {
-            position: relative;
-            width: 80px;
-            height: 24px;
-            margin: 0 auto;
-        }
-
-        .toggle-switch input { display: none; }
-
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: #fff;
-            border: 2px inset white;
-            border-radius: 0;
-        }
-
-        .toggle-slider::before {
-            content: '';
-            position: absolute;
-            width: 32px;
-            height: 16px;
-            top: 2px;
-            background: var(--bg-primary);
-            border: 2px outset white;
-            transition: left 0.2s;
-        }
-
-        .toggle-switch input:checked + .toggle-slider::before {
-            left: calc(100% - 34px);
-            background: #800080;
-        }
-
-        /* === CALCULATOR === */
-        .calculator {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 4px;
-            max-width: 200px;
-            margin: 0 auto;
-        }
-
-        .calc-display {
-            grid-column: span 4;
-            padding: 8px;
-            background: #9ead86;
-            border: 2px inset white;
-            font-family: 'Courier New', monospace;
-            font-size: 20px;
-            text-align: right;
-            margin-bottom: 8px;
-            min-height: 32px;
-        }
-
-        .calc-btn {
-            padding: 10px;
-            border: 2px outset white;
-            background: var(--bg-primary);
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            font-family: inherit;
-        }
-
-        .calc-btn:active {
-            border: 2px inset white;
-        }
-
-        .calc-btn.equals {
-            background: #800080;
-            color: white;
-        }
-
-        .calc-btn.clear {
-            background: #ff6b6b;
-        }
-
-        /* === TIC TAC TOE === */
-        .ttt-board {
-            display: grid;
-            grid-template-columns: repeat(3, 60px);
-            gap: 4px;
-            margin: 12px auto;
-            width: fit-content;
-        }
-
-        .ttt-cell {
-            width: 60px;
-            height: 60px;
-            background: var(--bg-primary);
-            border: 2px outset white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .ttt-cell:active {
-            border: 2px inset white;
-        }
-
-        .ttt-cell.x { color: #ff0000; }
-        .ttt-cell.o { color: #0000ff; }
-
-        .ttt-status {
-            text-align: center;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 12px;
-            color: var(--highlight);
-        }
-
-        /* V3: Stats bar styling */
-        .ttt-stats-bar {
-            text-align: center;
-            font-size: 11px;
-            margin-bottom: 8px;
-            padding: 6px;
-            background: #000080;
-            color: #fff;
-            border: 2px inset white;
-        }
-
-        /* === MEMORY GAME === */
-        .memory-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 50px);
-            gap: 6px;
-            margin: 12px auto;
-            width: fit-content;
-        }
-
-        .memory-card {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #000080, #800080);
-            border: 2px outset white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            color: white;
-        }
-
-        .memory-card.flipped {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-        }
-
-        .memory-card.matched {
-            background: #00ff00;
-            border: 2px inset white;
-        }
-
-        .memory-stats {
-            text-align: center;
-            font-size: 12px;
-            margin-bottom: 12px;
-        }
-
-        /* === SNAKE GAME === */
-        .snake-container {
-            text-align: center;
-        }
-
-        .snake-canvas {
-            border: 4px inset white;
-            background: #000;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .snake-score {
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: var(--highlight);
-        }
-
-        .snake-controls {
-            font-size: 11px;
-            color: #404040;
-            margin-top: 8px;
-        }
-
-        /* === TYPER GAME === */
-        .typer-display {
-            background: #000;
-            color: var(--retro-green);
-            padding: 16px;
-            border: 4px inset white;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            margin-bottom: 12px;
-            min-height: 80px;
-            position: relative;
-        }
-
-        .typer-text {
-            opacity: 0.5;
-        }
-
-        .typer-cursor {
-            background: var(--retro-green);
-            color: #000;
-        }
-
-        .typer-input {
-            width: 100%;
-            padding: 8px;
-            border: 2px inset white;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-        }
-
-        .typer-stats {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 12px;
-            font-size: 12px;
-        }
-
-        .typer-stat {
-            text-align: center;
-        }
-
-        .typer-stat-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--highlight);
-        }
-
-        /* === REACTION TEST === */
-        .reaction-area {
-            height: 150px;
-            border: 4px outset white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            margin: 12px 0;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .reaction-area.waiting { background: #ff0000; color: white; }
-        .reaction-area.ready { background: #00ff00; color: #000; }
-        .reaction-area.result { background: var(--bg-primary); }
-
-        .reaction-results {
-            text-align: center;
-            font-size: 12px;
-            margin-top: 12px;
-        }
-
-        /* === FOOTER === */
-        footer {
-            text-align: center;
-            padding: 16px;
-            border-top: 2px solid var(--border-dark);
-            font-size: 10px;
-            color: var(--highlight);
-        }
-
-        footer a {
-            color: var(--link-blue);
-        }
-
-        footer a:visited {
-            color: var(--visited-purple);
-        }
-
-        /* === UNDER CONSTRUCTION === */
-        .construction {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 8px;
-            background: #ffff00;
-            color: #000;
-            font-size: 11px;
-            border: 2px outset white;
-            margin: 8px auto;
-            width: fit-content;
-        }
-
-        .construction-icon {
-            width: 24px;
-            height: 24px;
-            background: repeating-conic-gradient(#ff0 0deg 90deg, #000 90deg 180deg) 0 0/12px 12px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* === RESPONSIVE === */
-        @media (max-width: 600px) {
-            .app-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .welcome-banner h2 {
-                font-size: 20px;
-            }
-            .countdown-display {
-                font-size: 36px;
-            }
-        }
-
-        /* === VISITOR COUNTER === */
-        .visitor-counter {
-            text-align: center;
-            padding: 8px;
-            font-size: 11px;
-            font-family: 'Courier New', monospace;
-            border: 2px inset white;
-            margin: 8px auto;
-            width: fit-content;
-        }
-
-        .counter-digits {
-            background: #000;
-            color: var(--retro-red);
-            padding: 4px 8px;
-            letter-spacing: 4px;
-        }
-    </style>
+    <link rel="stylesheet" href="/src/styles/main.css">
 </head>
+
 <body>
+    <!-- HUMAN FEEL: STALLING LOADING BAR -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-box">
+            <div id="loading-text">Starting system...</div>
+            <div class="loading-bar-container">
+                <div id="loading-bar-fill" class="loading-bar-fill"></div>
+            </div>
+        </div>
+    </div>
+
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <header role="banner">
         <div class="title-bar">
@@ -750,7 +50,8 @@
                 <p>Your one-stop destination for awesome 90s-style mini apps!</p>
                 <div class="marquee-container">
                     <div class="marquee">
-                        ★★★ NEW GAMES ADDED! ★★★ PLAY SNAKE! ★★★ TEST YOUR REFINEXES! ★★★ CHALLENGE YOUR MEMORY! ★★★ TYPE FAST! ★★★
+                        ★★★ NEW GAMES ADDED! ★★★ PLAY SNAKE! ★★★ TEST YOUR REFINEXES! ★★★ CHALLENGE YOUR MEMORY! ★★★
+                        TYPE FAST! ★★★
                     </div>
                 </div>
             </div>
@@ -760,55 +61,89 @@
             </div>
 
             <div class="app-grid" role="list" aria-label="Available apps">
-                <div class="app-card" onclick="showApp('color')" role="listitem" tabindex="0" aria-label="Open Color Changer app">
+                <div class="app-card" onclick="showApp('color')" role="listitem" tabindex="0"
+                    aria-label="Open Color Changer app">
                     <div class="app-icon" aria-hidden="true">🎨</div>
                     <h3>Color Changer</h3>
                     <p>Random colors</p>
                 </div>
-                <div class="app-card" onclick="showApp('popup')" role="listitem" tabindex="0" aria-label="Open Popup Notify app">
+                <div class="app-card" onclick="showApp('popup')" role="listitem" tabindex="0"
+                    aria-label="Open Popup Notify app">
                     <div class="app-icon" aria-hidden="true">🔔</div>
                     <h3>Popup Notify</h3>
                     <p>Toast messages</p>
                 </div>
-                <div class="app-card" onclick="showApp('countdown')" role="listitem" tabindex="0" aria-label="Open Countdown app">
+                <div class="app-card" onclick="showApp('countdown')" role="listitem" tabindex="0"
+                    aria-label="Open Countdown app">
                     <div class="app-icon" aria-hidden="true">⏱️</div>
                     <h3>Countdown</h3>
                     <p>Event timer</p>
                 </div>
-                <div class="app-card" onclick="showApp('darkmode')" role="listitem" tabindex="0" aria-label="Open Theme Toggle app">
+                <div class="app-card" onclick="showApp('darkmode')" role="listitem" tabindex="0"
+                    aria-label="Open Theme Toggle app">
                     <div class="app-icon" aria-hidden="true">🌙</div>
                     <h3>Theme Toggle</h3>
                     <p>Dark/Light mode</p>
                 </div>
-                <div class="app-card" onclick="showApp('calculator')" role="listitem" tabindex="0" aria-label="Open Calculator app">
+                <div class="app-card" onclick="showApp('calculator')" role="listitem" tabindex="0"
+                    aria-label="Open Calculator app">
                     <div class="app-icon" aria-hidden="true">🔢</div>
                     <h3>Calculator</h3>
                     <p>Math tool</p>
                 </div>
-                <div class="app-card" onclick="showApp('tictactoe')" role="listitem" tabindex="0" aria-label="Open Tic Tac Toe game">
+                <div class="app-card" onclick="showApp('tictactoe')" role="listitem" tabindex="0"
+                    aria-label="Open Tic Tac Toe game">
                     <div class="app-icon" aria-hidden="true">⭕</div>
                     <h3>Tic Tac Toe</h3>
                     <p>Classic game</p>
                 </div>
-                <div class="app-card" onclick="showApp('memory')" role="listitem" tabindex="0" aria-label="Open Memory Match game">
+                <div class="app-card" onclick="showApp('memory')" role="listitem" tabindex="0"
+                    aria-label="Open Memory Match game">
                     <div class="app-icon" aria-hidden="true">🧠</div>
                     <h3>Memory Match</h3>
                     <p>Card game</p>
                 </div>
-                <div class="app-card" onclick="showApp('snake')" role="listitem" tabindex="0" aria-label="Open Snake game">
+                <div class="app-card" onclick="showApp('snake')" role="listitem" tabindex="0"
+                    aria-label="Open Snake game">
                     <div class="app-icon" aria-hidden="true">🐍</div>
                     <h3>Snake</h3>
                     <p>Retro classic</p>
                 </div>
-                <div class="app-card" onclick="showApp('typer')" role="listitem" tabindex="0" aria-label="Open Speed Typer game">
+                <div class="app-card" onclick="showApp('typer')" role="listitem" tabindex="0"
+                    aria-label="Open Speed Typer game">
                     <div class="app-icon" aria-hidden="true">⌨️</div>
                     <h3>Speed Typer</h3>
                     <p>Typing game</p>
                 </div>
-                <div class="app-card" onclick="showApp('reaction')" role="listitem" tabindex="0" aria-label="Open Reaction Test game">
+                <div class="app-card" onclick="showApp('reaction')" role="listitem" tabindex="0"
+                    aria-label="Open Reaction Test game">
                     <div class="app-icon" aria-hidden="true">⚡</div>
                     <h3>Reaction Test</h3>
                     <p>Test reflexes</p>
+                </div>
+                <div class="app-card" onclick="showApp('guestbook')" role="listitem" tabindex="0"
+                    aria-label="Open Guestbook app">
+                    <div class="app-icon" aria-hidden="true">✍️</div>
+                    <h3>Guestbook</h3>
+                    <p>Leave your mark!</p>
+                </div>
+                <div class="app-card" onclick="showApp('explorer')" role="listitem" tabindex="0"
+                    aria-label="Open File Explorer app">
+                    <div class="app-icon" aria-hidden="true">📂</div>
+                    <h3>File Explorer</h3>
+                    <p>Browse the vault</p>
+                </div>
+                <div class="app-card" onclick="showApp('soundboard')" role="listitem" tabindex="0"
+                    aria-label="Open Soundboard app">
+                    <div class="app-icon" aria-hidden="true">🔊</div>
+                    <h3>Soundboard</h3>
+                    <p>Internet classics</p>
+                </div>
+                <div class="app-card" onclick="showApp('breakout')" role="listitem" tabindex="0"
+                    aria-label="Open Breakout game">
+                    <div class="app-icon" aria-hidden="true">🧱</div>
+                    <h3>Breakout</h3>
+                    <p>Brick breaker</p>
                 </div>
             </div>
 
@@ -849,7 +184,8 @@
                 <div class="window-content">
                     <h2>🔔 Toast Notification System</h2>
                     <p>Click buttons to see different notification types!</p>
-                    <div class="toast-container" id="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+                    <div class="toast-container" id="toast-container" role="status" aria-live="polite"
+                        aria-atomic="true"></div>
                     <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
                         <button class="retro-btn" onclick="showToast('success')">Success</button>
                         <button class="retro-btn" onclick="showToast('error')">Error</button>
@@ -876,7 +212,8 @@
                     </div>
                     <div class="countdown-display" id="countdown-display">00:10</div>
                     <div class="countdown-controls">
-                        <button class="retro-btn primary" id="countdown-start-btn" onclick="toggleCountdown()">Start</button>
+                        <button class="retro-btn primary" id="countdown-start-btn"
+                            onclick="toggleCountdown()">Start</button>
                         <button class="retro-btn" onclick="resetCountdown()">Reset</button>
                     </div>
                 </div>
@@ -891,14 +228,23 @@
                     <span>×</span>
                 </div>
                 <div class="window-content">
-                    <h2>🌙 Dark Mode Toggle</h2>
-                    <p>Toggle between light and dark themes!</p>
+                    <h2>🌙 Theme Selector</h2>
+                    <p>Choose your preferred visual theme!</p>
                     <div class="theme-preview">
-                        <label class="toggle-switch">
-                            <input type="checkbox" onchange="toggleTheme(this.checked)">
-                            <span class="toggle-slider"></span>
-                        </label>
-                        <p id="theme-status" style="margin-top: 12px;">Light Mode</p>
+                        <p id="theme-status">Theme: Win95 Classic</p>
+                        <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+                            <select id="theme-select" class="retro-btn" onchange="window.setTheme(this.value)"
+                                style="width: 100%; border: 2px inset white;">
+                                <option value="win95">Classic Win95</option>
+                                <option value="terminal">Cyber-Terminal</option>
+                                <option value="vaporwave">Vaporwave Neon</option>
+                                <option value="dark">Stealth Dark</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="retro-btn" onclick="showApp('devlog')"
+                            style="opacity: 0; pointer-events: none;">Dev Log</button>
                     </div>
                 </div>
             </div>
@@ -927,11 +273,13 @@
                         <button class="calc-btn" onclick="calcInput('4')" data-key="4">4</button>
                         <button class="calc-btn" onclick="calcInput('5')" data-key="5">5</button>
                         <button class="calc-btn" onclick="calcInput('6')" data-key="6">6</button>
-                        <button class="calc-btn equals" onclick="calcEquals()" data-key="Enter" style="grid-row: span 2;">=</button>
+                        <button class="calc-btn equals" onclick="calcEquals()" data-key="Enter"
+                            style="grid-row: span 2;">=</button>
                         <button class="calc-btn" onclick="calcInput('1')" data-key="1">1</button>
                         <button class="calc-btn" onclick="calcInput('2')" data-key="2">2</button>
                         <button class="calc-btn" onclick="calcInput('3')" data-key="3">3</button>
-                        <button class="calc-btn" onclick="calcInput('0')" data-key="0" style="grid-column: span 2;">0</button>
+                        <button class="calc-btn" onclick="calcInput('0')" data-key="0"
+                            style="grid-column: span 2;">0</button>
                         <button class="calc-btn" onclick="calcInput('.')" data-key=".">.</button>
                     </div>
                 </div>
@@ -1018,7 +366,8 @@
                     <h2>⌨️ Speed Typing Game</h2>
                     <p>Type the text as fast as you can!</p>
                     <div class="typer-display" id="typer-display"></div>
-                    <input type="text" class="typer-input" id="typer-input" placeholder="Start typing..." autocomplete="off">
+                    <input type="text" class="typer-input" id="typer-input" placeholder="Start typing..."
+                        autocomplete="off">
                     <div class="typer-stats">
                         <div class="typer-stat">
                             <div>WPM</div>
@@ -1056,6 +405,28 @@
             </div>
         </div>
 
+        <!-- BREAKOUT GAME APP -->
+        <div id="app-breakout" class="app-view">
+            <div class="window">
+                <div class="window-title">
+                    <span>Breakout</span>
+                    <span>×</span>
+                </div>
+                <div class="window-content">
+                    <h2>🧱 Brick Breaker</h2>
+                    <p>Use arrow keys or mouse to move the paddle!</p>
+                    <div class="breakout-stats">
+                        <div>Score: <span id="breakout-score">0</span></div>
+                        <div>Lives: <span id="breakout-lives">3</span></div>
+                        <div>Best: <span id="breakout-best">0</span></div>
+                    </div>
+                    <canvas id="breakout-canvas" class="breakout-canvas" width="400" height="300"></canvas>
+                    <p class="breakout-controls">Arrow keys or mouse to move paddle</p>
+                    <button class="retro-btn primary" onclick="initBreakoutGame()">New Game</button>
+                </div>
+            </div>
+        </div>
+
         <!-- ABOUT APP -->
         <div id="app-about" class="app-view">
             <div class="window">
@@ -1086,7 +457,8 @@
                 </div>
                 <div class="window-content">
                     <h2>How to Use</h2>
-                    <p><strong>Navigation:</strong> Click on any app card to open it. Click "Back to Hub" or "Home" menu to return.</p>
+                    <p><strong>Navigation:</strong> Click on any app card to open it. Click "Back to Hub" or "Home" menu
+                        to return.</p>
                     <p><strong>Games:</strong> Each game has on-screen instructions.</p>
                     <p><strong>Keyboard Shortcuts:</strong></p>
                     <ul style="margin-left: 20px; font-size: 12px;">
@@ -1100,673 +472,122 @@
                 </div>
             </div>
         </div>
+        <!-- VIRTUAL GUESTBOOK -->
+        <div id="app-guestbook" class="app-view">
+            <div class="window">
+                <div class="window-title">
+                    <span>Guestbook.exe</span>
+                    <div class="window-controls">
+                        <div class="win-btn" onclick="showHub()">_</div>
+                        <div class="win-btn" onclick="showHub()">X</div>
+                    </div>
+                </div>
+                <div class="window-content">
+                    <h2>Virtual Guestbook</h2>
+                    <p>Sign the book and leave a message for future visitors!</p>
+
+                    <div id="guestbook-form"
+                        style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+                        <input type="text" id="gb-name" placeholder="Your Name" class="retro-input"
+                            style="padding: 8px; border: 2px inset white; background: white;">
+                        <textarea id="gb-message" placeholder="Your Message" class="retro-input"
+                            style="padding: 8px; border: 2px inset white; background: white; min-height: 60px; resize: vertical;"></textarea>
+                        <button class="retro-btn" onclick="submitGuestbook()">Sign Guestbook</button>
+                    </div>
+
+                    <div id="guestbook-list" class="toast-container" style="max-height: 300px; background: #eee;">
+                        <div style="padding: 20px; text-align: center; color: #888;">Loading entries...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FILE EXPLORER -->
+        <div id="app-explorer" class="app-view">
+            <div class="window" style="max-width: 600px;">
+                <div class="window-title">
+                    <span>Explorer - C:\RETRO_VAULT</span>
+                    <div class="window-controls">
+                        <div class="win-btn" onclick="showHub()">_</div>
+                        <div class="win-btn" onclick="showHub()">X</div>
+                    </div>
+                </div>
+                <div class="window-content" style="padding: 0;">
+                    <div class="explorer-toolbar"
+                        style="padding: 4px; background: #c0c0c0; border-bottom: 1px solid #808080; display: flex; gap: 8px;">
+                        <button class="retro-btn" style="padding: 2px 8px; font-size: 10px;"
+                            onclick="explorerBack()">Back</button>
+                        <div style="background: white; border: 2px inset white; flex-grow: 1; padding: 2px 4px; font-size: 10px;"
+                            id="explorer-path">C:\RETRO_VAULT</div>
+                    </div>
+                    <div id="explorer-files"
+                        style="padding: 16px; background: white; min-height: 250px; display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 16px;">
+                        <!-- Files populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SOUNDBOARD -->
+        <div id="app-soundboard" class="app-view">
+            <div class="window" style="max-width: 550px;">
+                <div class="window-title">
+                    <span>SoundPlayer.exe</span>
+                    <div class="window-controls">
+                        <div class="win-btn" onclick="showHub()">_</div>
+                        <div class="win-btn" onclick="showHub()">X</div>
+                    </div>
+                </div>
+                <div class="window-content">
+                    <h2>Internet Soundboard</h2>
+                    <p>Retro sound effects and internet classics.</p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px;">
+                        <button class="retro-btn" onclick="playSfx('dialup')">☏ Dial-up</button>
+                        <button class="retro-btn" onclick="playSfx('u-got-mail')">✉ You've got mail</button>
+                        <button class="retro-btn" onclick="playSfx('tada')">🎉 Win Tada</button>
+                        <button class="retro-btn" onclick="playSfx('shutdown')">🔌 Win Shutdown</button>
+                        <button class="retro-btn" onclick="playSfx('notify')">🔔 ICQ Uh-Oh</button>
+                        <button class="retro-btn" onclick="playSfx('error')">⚠️ Critical Error</button>
+                    </div>
+
+                    <div
+                        style="margin-top: 20px; padding: 10px; border: 2px inset white; background: #000; color: #0f0; font-family: monospace; font-size: 10px;">
+                        Status: Ready...<br>
+                        Now Playing: <span id="sound-status">None</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
         <a href="#">Made by MK</a> — Built by Musharraf Kazi • © 2026 Retro Web Hub •
-        <a href="#">Contact</a> • <a href="#">Guestbook</a>
+        <a href="#">Contact</a> • <a href="#">Guestbook</a> • <span style="opacity: 0.3; cursor: help;"
+            onclick="window.revealDevLog()">[v3.4.2]</span>
     </footer>
 
-    <script>
-        (function() {
-            'use strict';
-
-            // === GLOBAL STATE ===
-            const state = {
-            theme: 'light',
-            visitorCount: parseInt(localStorage.getItem('visitor-count') || '0'),
-            reactionBest: parseInt(localStorage.getItem('reaction-best') || '9999'),
-            // V3: New game stats
-            snakeHighScore: parseInt(localStorage.getItem('snake-highscore') || '0'),
-            tttStats: JSON.parse(localStorage.getItem('ttt-stats') || '{"wins":0,"losses":0,"draws":0}'),
-            memoryBestMoves: parseInt(localStorage.getItem('memory-best') || '999')
-        };
-
-        // === NAVIGATION ===
-        function showHub() {
-            cleanupCurrentApp();
-            document.getElementById('hub-view').style.display = 'block';
-            document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active'));
-            document.querySelector('.back-btn').style.display = 'none';
-        }
-
-        function showApp(appName) {
-            // Cleanup any running intervals from previous apps
-            cleanupCurrentApp();
-
-            document.getElementById('hub-view').style.display = 'none';
-            document.getElementById('app-' + appName).classList.add('active');
-            document.querySelector('.back-btn').style.display = 'block';
-
-            // Initialize app-specific code
-            if (appName === 'tictactoe') initTicTacToe();
-            if (appName === 'memory') initMemoryGame();
-            if (appName === 'snake') initSnakeGame();
-            if (appName === 'typer') initTyperGame();
-            if (appName === 'reaction') resetReactionGame();
-        }
-
-        function cleanupCurrentApp() {
-            // Clean up countdown timer
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-                countdownInterval = null;
-                isCountdownRunning = false;
-            }
-
-            // Clean up reaction timer
-            if (reactionTimeout) {
-                clearTimeout(reactionTimeout);
-                reactionTimeout = null;
-            }
-        }
-
-        // === VISITOR COUNTER ===
-        function updateVisitorCount() {
-            state.visitorCount++;
-            localStorage.setItem('visitor-count', state.visitorCount);
-            document.getElementById('visitor-count').textContent = state.visitorCount.toString().padStart(6, '0');
-        }
-        updateVisitorCount();
-
-        // === COLOR CHANGER ===
-        const colorMessages = ["Awesome!", "Retro!", "Groovy!", "Radical!", "Tubular!", "Excellent!", "Far out!", "Cool!", "Nice!", "Dude!"];
-
-        function changeColor() {
-            const hue = Math.floor(Math.random() * 360);
-            const color = `hsl(${hue}, 70%, 50%)`;
-            const hex = hslToHex(hue, 70, 50);
-            document.getElementById('color-display').style.backgroundColor = color;
-            document.getElementById('color-display').style.color = hue > 180 && hue < 300 ? '#fff' : '#000';
-            document.getElementById('color-display').textContent = hex;
-            document.getElementById('color-code').textContent = hex + ` | HSL(${hue}, 70%, 50%)`;
-            document.getElementById('color-message').textContent = colorMessages[Math.floor(Math.random() * colorMessages.length)];
-        }
-
-        function hslToHex(h, s, l) {
-            l /= 100;
-            const a = s * Math.min(l, 1 - l) / 100;
-            const f = n => {
-                const k = (n + h / 30) % 12;
-                const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
-                return Math.round(255 * color).toString(16).padStart(2, '0');
-            };
-            return `#${f(0)}${f(8)}${f(4)}`.toUpperCase();
-        }
-
-        // === TOAST NOTIFICATIONS ===
-        function showToast(type) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = 'toast ' + type;
-            const messages = {
-                success: '✓ Operation completed!',
-                error: '✗ Something went wrong!',
-                info: 'ℹ Information message',
-                warning: '⚠ Warning!'
-            };
-            toast.textContent = messages[type];
-            container.insertBefore(toast, container.firstChild);
-            setTimeout(() => toast.remove(), 3000);
-        }
-
-        // === COUNTDOWN TIMER ===
-        let countdownInterval = null;
-        let countdownSeconds = 10;
-        let isCountdownRunning = false;
-
-        function toggleCountdown() {
-            const btn = document.getElementById('countdown-start-btn');
-            if (isCountdownRunning) {
-                clearInterval(countdownInterval);
-                isCountdownRunning = false;
-                btn.textContent = 'Resume';
-            } else {
-                if (countdownSeconds <= 0) {
-                    countdownSeconds = parseInt(document.getElementById('countdown-input').value) || 10;
-                }
-                isCountdownRunning = true;
-                btn.textContent = 'Pause';
-                countdownInterval = setInterval(() => {
-                    if (countdownSeconds <= 0) {
-                        clearInterval(countdownInterval);
-                        isCountdownRunning = false;
-                        document.getElementById('countdown-display').textContent = '00:00';
-                        btn.textContent = 'Start';
-                        showToast('success');
-                        return;
-                    }
-                    countdownSeconds--;
-                    document.getElementById('countdown-display').textContent = '00:' + countdownSeconds.toString().padStart(2, '0');
-                }, 1000);
-            }
-        }
-
-        function resetCountdown() {
-            clearInterval(countdownInterval);
-            isCountdownRunning = false;
-            countdownSeconds = parseInt(document.getElementById('countdown-input').value) || 10;
-            document.getElementById('countdown-display').textContent = '00:' + countdownSeconds.toString().padStart(2, '0');
-            document.getElementById('countdown-start-btn').textContent = 'Start';
-        }
-
-        // === DARK MODE ===
-        function toggleTheme(isDark) {
-            document.documentElement.style.setProperty('--bg-primary', isDark ? '#2d2d2d' : '#c0c0c0');
-            document.documentElement.style.setProperty('--bg-secondary', isDark ? '#1a1a1a' : '#ffffff');
-            document.documentElement.style.setProperty('--text-primary', isDark ? '#ffffff' : '#000000');
-            document.getElementById('theme-status').textContent = isDark ? 'Dark Mode' : 'Light Mode';
-            localStorage.setItem('retrohub-theme', isDark ? 'dark' : 'light');
-        }
-
-        // Load saved theme
-        (function() {
-            const savedTheme = localStorage.getItem('retrohub-theme');
-            if (savedTheme === 'dark') {
-                const toggle = document.querySelector('.toggle-switch input');
-                if (toggle) {
-                    toggle.checked = true;
-                    toggleTheme(true);
-                }
-            }
-        })();
-
-        // === CALCULATOR ===
-        let calcExpression = '';
-
-        function calcInput(value) {
-            if (calcExpression === 'Error') calcExpression = '';
-            calcExpression += value;
-            document.getElementById('calc-display').textContent = calcExpression;
-        }
-
-        function calcClear() {
-            calcExpression = '';
-            document.getElementById('calc-display').textContent = '0';
-        }
-
-        function calcEquals() {
-            try {
-                const sanitized = calcExpression.replace(/[^0-9+\-*/().\s]/g, '');
-                if (sanitized !== calcExpression) {
-                    document.getElementById('calc-display').textContent = 'Error';
-                    calcExpression = '';
-                    return;
-                }
-                const result = new Function('return ' + sanitized)();
-                calcExpression = result.toString();
-                document.getElementById('calc-display').textContent = calcExpression;
-            } catch {
-                document.getElementById('calc-display').textContent = 'Error';
-                calcExpression = '';
-            }
-        }
-
-        // Calculator keyboard support
-        document.addEventListener('keydown', (e) => {
-            const calculatorView = document.getElementById('app-calculator');
-            if (!calculatorView || !calculatorView.classList.contains('active')) return;
-
-            const key = e.key;
-            if (/^[0-9+\-*/.]$/.test(key)) {
-                e.preventDefault();
-                calcInput(key);
-            } else if (key === 'Enter') {
-                e.preventDefault();
-                calcEquals();
-            } else if (key === 'Escape' || key === 'c' || key === 'C') {
-                e.preventDefault();
-                calcClear();
-            } else if (key === 'Backspace') {
-                e.preventDefault();
-                if (calcExpression.length > 0) {
-                    calcExpression = calcExpression.slice(0, -1);
-                    document.getElementById('calc-display').textContent = calcExpression || '0';
-                }
-            }
-        });
-
-        // === TIC TAC TOE ===
-        let tttBoard = ['', '', '', '', '', '', '', '', ''];
-        let tttGameActive = true;
-        let tttCurrentPlayer = 'X';
-
-        function initTicTacToe() {
-            tttBoard = ['', '', '', '', '', '', '', '', ''];
-            tttGameActive = true;
-            tttCurrentPlayer = 'X';
-            renderTicTacToe();
-            document.getElementById('ttt-status').textContent = 'Your turn (X)';
-            // V3: Update stats display
-            document.getElementById('ttt-wins').textContent = state.tttStats.wins;
-            document.getElementById('ttt-losses').textContent = state.tttStats.losses;
-            document.getElementById('ttt-draws').textContent = state.tttStats.draws;
-        }
-
-        function renderTicTacToe() {
-            const board = document.getElementById('ttt-board');
-            board.innerHTML = '';
-            tttBoard.forEach((cell, index) => {
-                const div = document.createElement('div');
-                div.className = 'ttt-cell ' + cell.toLowerCase();
-                div.textContent = cell;
-                div.onclick = () => handleTicTacToeClick(index);
-                board.appendChild(div);
-            });
-        }
-
-        function handleTicTacToeClick(index) {
-            if (tttBoard[index] || !tttGameActive || tttCurrentPlayer !== 'X') return;
-
-            tttBoard[index] = 'X';
-            renderTicTacToe();
-
-            if (checkTicTacToeWin('X')) {
-                document.getElementById('ttt-status').textContent = 'You win! 🎉';
-                tttGameActive = false;
-                // V3: Save win stat
-                state.tttStats.wins++;
-                localStorage.setItem('ttt-stats', JSON.stringify(state.tttStats));
-                document.getElementById('ttt-wins').textContent = state.tttStats.wins;
-                return;
-            }
-
-            if (!tttBoard.includes('')) {
-                document.getElementById('ttt-status').textContent = "It's a draw!";
-                tttGameActive = false;
-                // V3: Save draw stat
-                state.tttStats.draws++;
-                localStorage.setItem('ttt-stats', JSON.stringify(state.tttStats));
-                document.getElementById('ttt-draws').textContent = state.tttStats.draws;
-                return;
-            }
-
-            // Computer move
-            tttCurrentPlayer = 'O';
-            document.getElementById('ttt-status').textContent = 'Computer thinking...';
-            setTimeout(computerTicTacToeMove, 500);
-        }
-
-        function computerTicTacToeMove() {
-            // Simple AI: try to win, block, or random
-            let move = findBestTicTacToeMove('O') ?? findBestTicTacToeMove('X') ?? tttBoard.findIndex(c => c === '');
-            if (move !== -1) {
-                tttBoard[move] = 'O';
-                renderTicTacToe();
-
-                if (checkTicTacToeWin('O')) {
-                    document.getElementById('ttt-status').textContent = 'Computer wins! 🤖';
-                    tttGameActive = false;
-                    // V3: Save loss stat
-                    state.tttStats.losses++;
-                    localStorage.setItem('ttt-stats', JSON.stringify(state.tttStats));
-                    document.getElementById('ttt-losses').textContent = state.tttStats.losses;
-                    return;
-                }
-
-                if (!tttBoard.includes('')) {
-                    document.getElementById('ttt-status').textContent = "It's a draw!";
-                    tttGameActive = false;
-                    // V3: Save draw stat
-                    state.tttStats.draws++;
-                    localStorage.setItem('ttt-stats', JSON.stringify(state.tttStats));
-                    document.getElementById('ttt-draws').textContent = state.tttStats.draws;
-                    return;
-                }
-            }
-
-            tttCurrentPlayer = 'X';
-            document.getElementById('ttt-status').textContent = 'Your turn (X)';
-        }
-
-        function findBestTicTacToeMove(player) {
-            const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-            for (const [a, b, c] of wins) {
-                if (tttBoard[a] === player && tttBoard[b] === player && !tttBoard[c]) return c;
-                if (tttBoard[a] === player && tttBoard[c] === player && !tttBoard[b]) return b;
-                if (tttBoard[b] === player && tttBoard[c] === player && !tttBoard[a]) return a;
-            }
-            return null;
-        }
-
-        function checkTicTacToeWin(player) {
-            const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-            return wins.some(([a, b, c]) => tttBoard[a] === player && tttBoard[b] === player && tttBoard[c] === player);
-        }
-
-        // === MEMORY GAME ===
-        const memoryEmojis = ['🍕', '🍕', '🎮', '🎮', '🚀', '🚀', '🌈', '🌈', '🎵', '🎵', '💎', '💎', '🔥', '🔥', '⭐', '⭐'];
-        let memoryCards = [];
-        let memoryFlipped = [];
-        let memoryMatched = 0;
-        let memoryMoves = 0;
-        let memoryCanFlip = true;
-
-        function initMemoryGame() {
-            memoryCards = [...memoryEmojis].sort(() => Math.random() - 0.5);
-            memoryFlipped = [];
-            memoryMatched = 0;
-            memoryMoves = 0;
-            memoryCanFlip = true;
-            renderMemoryGame();
-            updateMemoryStats();
-            // V3: Show best score
-            document.getElementById('memory-best').textContent = state.memoryBestMoves < 999 ? state.memoryBestMoves : '-';
-        }
-
-        function renderMemoryGame() {
-            const grid = document.getElementById('memory-grid');
-            grid.innerHTML = '';
-            memoryCards.forEach((emoji, index) => {
-                const card = document.createElement('div');
-                card.className = 'memory-card';
-                card.textContent = memoryFlipped.includes(index) || memoryCards[index].matched ? emoji : '';
-                if (memoryCards[index].matched) card.classList.add('matched');
-                if (memoryFlipped.includes(index) || memoryCards[index].matched) card.classList.add('flipped');
-                card.onclick = () => handleMemoryClick(index);
-                grid.appendChild(card);
-            });
-        }
-
-        function handleMemoryClick(index) {
-            if (!memoryCanFlip || memoryFlipped.includes(index) || memoryCards[index].matched) return;
-
-            memoryFlipped.push(index);
-            renderMemoryGame();
-
-            if (memoryFlipped.length === 2) {
-                memoryMoves++;
-                updateMemoryStats();
-                memoryCanFlip = false;
-
-                const [first, second] = memoryFlipped;
-                if (memoryCards[first] === memoryCards[second]) {
-                    memoryCards[first].matched = true;
-                    memoryCards[second].matched = true;
-                    memoryMatched++;
-                    memoryFlipped = [];
-                    memoryCanFlip = true;
-
-                    if (memoryMatched === 8) {
-                        // V3: Save best score (fewest moves)
-                        if (memoryMoves < state.memoryBestMoves) {
-                            state.memoryBestMoves = memoryMoves;
-                            localStorage.setItem('memory-best', memoryMoves);
-                            document.getElementById('memory-best').textContent = memoryMoves;
-                        }
-                        showToast('success');
-                    }
-                } else {
-                    setTimeout(() => {
-                        memoryFlipped = [];
-                        memoryCanFlip = true;
-                        renderMemoryGame();
-                    }, 1000);
-                }
-            }
-        }
-
-        function updateMemoryStats() {
-            document.getElementById('memory-moves').textContent = memoryMoves;
-            document.getElementById('memory-pairs').textContent = memoryMatched;
-        }
-
-        // === SNAKE GAME ===
-        let snakeCanvas, snakeCtx;
-        let snake = [{x: 5, y: 5}];
-        let snakeDirection = {x: 1, y: 0};
-        let snakeFood = {x: 10, y: 10};
-        let snakeScore = 0;
-        let snakeGameLoop = null;
-        let snakeLastTime = 0;
-        const snakeUpdateInterval = 150; // ms between updates
-
-        function initSnakeGame() {
-            snakeCanvas = document.getElementById('snake-canvas');
-            snakeCtx = snakeCanvas.getContext('2d');
-            snake = [{x: 5, y: 5}];
-            snakeDirection = {x: 1, y: 0};
-            snakeScore = 0;
-            snakeLastTime = performance.now();
-            document.getElementById('snake-score').textContent = '0';
-            document.getElementById('snake-best').textContent = state.snakeHighScore;
-            spawnSnakeFood();
-            if (snakeGameLoop) cancelAnimationFrame(snakeGameLoop);
-            snakeGameLoop = requestAnimationFrame(snakeGameLoopFn);
-        }
-
-        function snakeGameLoopFn(currentTime) {
-            const deltaTime = currentTime - snakeLastTime;
-            if (deltaTime >= snakeUpdateInterval) {
-                updateSnakeGame();
-                snakeLastTime = currentTime - (deltaTime % snakeUpdateInterval);
-            }
-            snakeGameLoop = requestAnimationFrame(snakeGameLoopFn);
-        }
-
-        function spawnSnakeFood() {
-            snakeFood = {
-                x: Math.floor(Math.random() * 20),
-                y: Math.floor(Math.random() * 20)
-            };
-        }
-
-        function updateSnakeGame() {
-            // Move snake
-            const head = {
-                x: snake[0].x + snakeDirection.x,
-                y: snake[0].y + snakeDirection.y
-            };
-
-            // Check collision with walls
-            if (head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20) {
-                gameOverSnake();
-                return;
-            }
-
-            // Check collision with self
-            if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
-                gameOverSnake();
-                return;
-            }
-
-            snake.unshift(head);
-
-            // Check food collision
-            if (head.x === snakeFood.x && head.y === snakeFood.y) {
-                snakeScore += 10;
-                document.getElementById('snake-score').textContent = snakeScore;
-                spawnSnakeFood();
-            } else {
-                snake.pop();
-            }
-
-            drawSnakeGame();
-        }
-
-        function drawSnakeGame() {
-            // Clear canvas
-            snakeCtx.fillStyle = '#000';
-            snakeCtx.fillRect(0, 0, 200, 200);
-
-            // Draw food
-            snakeCtx.fillStyle = '#ff0000';
-            snakeCtx.fillRect(snakeFood.x * 10 + 1, snakeFood.y * 10 + 1, 8, 8);
-
-            // Draw snake
-            snakeCtx.fillStyle = '#00ff00';
-            snake.forEach(segment => {
-                snakeCtx.fillRect(segment.x * 10, segment.y * 10, 10, 10);
-            });
-        }
-
-        function gameOverSnake() {
-            cancelAnimationFrame(snakeGameLoop);
-            // V3: Save high score
-            if (snakeScore > state.snakeHighScore) {
-                state.snakeHighScore = snakeScore;
-                localStorage.setItem('snake-highscore', snakeScore);
-                document.getElementById('snake-best').textContent = snakeScore;
-                showToast('success');
-            } else {
-                showToast('error');
-            }
-        }
-
-        // Snake controls
-        document.addEventListener('keydown', (e) => {
-            const snakeView = document.getElementById('app-snake');
-            if (!snakeView || !snakeView.classList.contains('active')) return;
-
-            switch(e.key) {
-                case 'ArrowUp':
-                case 'w':
-                case 'W':
-                    e.preventDefault();
-                    if (snakeDirection.y === 0) snakeDirection = {x: 0, y: -1};
-                    break;
-                case 'ArrowDown':
-                case 's':
-                case 'S':
-                    e.preventDefault();
-                    if (snakeDirection.y === 0) snakeDirection = {x: 0, y: 1};
-                    break;
-                case 'ArrowLeft':
-                case 'a':
-                case 'A':
-                    e.preventDefault();
-                    if (snakeDirection.x === 0) snakeDirection = {x: -1, y: 0};
-                    break;
-                case 'ArrowRight':
-                case 'd':
-                case 'D':
-                    e.preventDefault();
-                    if (snakeDirection.x === 0) snakeDirection = {x: 1, y: 0};
-                    break;
-            }
-        });
-
-        // === SPEED TYPER ===
-        const typerTexts = [
-            "The quick brown fox jumps over the lazy dog.",
-            "Pack my box with five dozen liquor jugs.",
-            "How vexingly quick daft zebras jump!",
-            "Sphinx of black quartz, judge my vow.",
-            "The five boxing wizards jump quickly."
-        ];
-        let currentTyperText = '';
-        let typerStartTime = null;
-        let typerErrors = 0;
-
-        function initTyperGame() {
-            currentTyperText = typerTexts[Math.floor(Math.random() * typerTexts.length)];
-            typerStartTime = null;
-            typerErrors = 0;
-            document.getElementById('typer-input').value = '';
-            document.getElementById('typer-wpm').textContent = '0';
-            document.getElementById('typer-accuracy').textContent = '100%';
-            renderTyperDisplay();
-        }
-
-        function renderTyperDisplay() {
-            const display = document.getElementById('typer-display');
-            const input = document.getElementById('typer-input').value;
-            let html = '';
-            for (let i = 0; i < currentTyperText.length; i++) {
-                if (i < input.length) {
-                    if (input[i] === currentTyperText[i]) {
-                        html += `<span class="typer-cursor">${currentTyperText[i]}</span>`;
-                    } else {
-                        html += `<span style="background: #ff0000; color: #fff;">${currentTyperText[i]}</span>`;
-                    }
-                } else if (i === input.length) {
-                    html += `<span class="typer-cursor">${currentTyperText[i]}</span>`;
-                } else {
-                    html += `<span class="typer-text">${currentTyperText[i]}</span>`;
-                }
-            }
-            display.innerHTML = html;
-        }
-
-        document.getElementById('typer-input').addEventListener('input', function() {
-            if (!typerStartTime) typerStartTime = Date.now();
-            renderTyperDisplay();
-
-            const input = this.value;
-            typerErrors = 0;
-            for (let i = 0; i < input.length; i++) {
-                if (input[i] !== currentTyperText[i]) typerErrors++;
-            }
-
-            const elapsed = (Date.now() - typerStartTime) / 1000 / 60; // minutes
-            const words = input.length / 5;
-            const wpm = Math.round(words / elapsed) || 0;
-            const accuracy = Math.round((input.length - typerErrors) / input.length * 100) || 100;
-
-            document.getElementById('typer-wpm').textContent = wpm;
-            document.getElementById('typer-accuracy').textContent = accuracy + '%';
-
-            if (input === currentTyperText) {
-                showToast('success');
-            }
-        });
-
-        // === REACTION TEST ===
-        let reactionState = 'idle';
-        let reactionTimeout = null;
-        let reactionStartTime = 0;
-
-        function resetReactionGame() {
-            reactionState = 'idle';
-            const area = document.getElementById('reaction-area');
-            area.className = 'reaction-area waiting';
-            area.textContent = 'Click to Start';
-            document.getElementById('reaction-best').textContent = state.reactionBest < 9999 ? state.reactionBest : '--';
-        }
-
-        function handleReactionClick() {
-            const area = document.getElementById('reaction-area');
-
-            if (reactionState === 'idle') {
-                reactionState = 'waiting';
-                area.className = 'reaction-area waiting';
-                area.textContent = 'Wait for green...';
-                reactionTimeout = setTimeout(() => {
-                    reactionState = 'ready';
-                    area.className = 'reaction-area ready';
-                    area.textContent = 'CLICK NOW!';
-                    reactionStartTime = Date.now();
-                }, Math.random() * 3000 + 1000);
-            } else if (reactionState === 'waiting') {
-                clearTimeout(reactionTimeout);
-                reactionState = 'idle';
-                area.className = 'reaction-area waiting';
-                area.textContent = 'Too early! Click to try again';
-            } else if (reactionState === 'ready') {
-                const time = Date.now() - reactionStartTime;
-                reactionState = 'idle';
-                area.className = 'reaction-area result';
-                area.textContent = `${time}ms! Click to try again`;
-
-                if (time < state.reactionBest) {
-                    state.reactionBest = time;
-                    localStorage.setItem('reaction-best', time);
-                    document.getElementById('reaction-best').textContent = time;
-                    showToast('success');
-                }
-            }
-        }
-
-        // === KEYBOARD SHORTCUTS ===
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                showHub();
-            }
-        });
-
-        // Initialize some apps on load
-        changeColor();
-        })();
-    </script>
+    <!-- HIDDEN DEV LOG WINDOW -->
+    <div id="app-devlog" class="app-view">
+        <div class="window" style="max-width: 400px; border-color: #f0f;">
+            <div class="window-title" style="background: #f0f;">
+                <span>STRICTLY_SECRET.log</span>
+                <div class="window-controls">
+                    <div class="win-btn" onclick="showHub()">X</div>
+                </div>
+            </div>
+            <div class="window-content"
+                style="background: #1a1a1a; color: #f0f; font-family: monospace; font-size: 11px;">
+                <p>> [2026-02-01] Modularization complete. Feeling like a god.</p>
+                <p>> [2026-02-01] Added the guestbook. Hope nobody posts spam.</p>
+                <p>> [2026-02-01] The vaporwave theme is a bit much, but I love it.</p>
+                <p>> [2026-02-01] Stalled the loading bars to make it feel more "real". Users love waiting, right?</p>
+                <p>> [EOF]</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/src/scripts/main.js"></script>
 </body>
+
 </html>

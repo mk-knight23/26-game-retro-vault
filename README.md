@@ -1,4 +1,4 @@
-# Retro Web Hub - 90s Mini Apps Collection
+# 26-game-retro-vault
 
 > **A nostalgic trip back to the golden age of the web** 🕹️
 
@@ -111,30 +111,6 @@ python -m http.server
 - Too early click = penalty
 - Best time saved to localStorage
 
-## 🌍 Deployment
-
-Deploy the single `index.html` file anywhere:
-
-```bash
-# GitHub Pages - Push to gh-pages branch
-# Netlify - Drag and drop index.html
-# Vercel - Deploy with zero config
-```
-
-## 🏆 Credits
-
-**Made by MK — Built by Musharraf Kazi**
-
----
-
-*A nostalgic tribute to the web that was.* 🌐
-
----
-
-### Live Demo
-- GitHub Pages: <https://mk-knight23.github.io/26-JS-Mini-Games/>
-- Vercel: [Deploy your own](https://vercel.com/new)
-- Netlify: [Deploy your own](https://app.netlify.com/start)
 
 ---
 

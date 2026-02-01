@@ -1,0 +1,22 @@
+{
+    "name": "26-game-retro-vault",
+    "version": "4.0.0",
+    "description": "A curated time capsule of 90s web apps and games.",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "serve": "node server/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mk-knight23/26-game-retro-vault.git"
+    },
+    "dependencies": {
+        "express": "^4.21.0",
+        "cors": "^2.8.5"
+    },
+    "devDependencies": {
+        "vite": "^6.0.0"
+    }
+}
