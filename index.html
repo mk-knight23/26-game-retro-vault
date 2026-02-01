@@ -9,6 +9,21 @@
         /* === 90s RETRO THEME === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        /* Skip link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #000080;
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 1000;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
         :root {
             --bg-primary: #c0c0c0;
             --bg-secondary: #ffffff;
@@ -705,30 +720,31 @@
     </style>
 </head>
 <body>
-    <header>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header role="banner">
         <div class="title-bar">
             <h1>
-                <span class="title-bar-icon"></span>
+                <span class="title-bar-icon" aria-hidden="true"></span>
                 Retro Web Hub - Mini Apps Collection
             </h1>
-            <div class="window-controls">
-                <button class="win-btn">_</button>
-                <button class="win-btn">□</button>
-                <button class="win-btn">×</button>
+            <div class="window-controls" role="presentation">
+                <button class="win-btn" aria-label="Minimize window">_</button>
+                <button class="win-btn" aria-label="Maximize window">□</button>
+                <button class="win-btn" aria-label="Close window">×</button>
             </div>
         </div>
-        <div class="menu-bar">
-            <div class="menu-item" onclick="showHub()">Home</div>
-            <div class="menu-item" onclick="showApp('about')">About</div>
-            <div class="menu-item" onclick="showApp('help')">Help</div>
-        </div>
+        <nav class="menu-bar" role="navigation" aria-label="Main navigation">
+            <div class="menu-item" onclick="showHub()" role="button" tabindex="0">Home</div>
+            <div class="menu-item" onclick="showApp('about')" role="button" tabindex="0">About</div>
+            <div class="menu-item" onclick="showApp('help')" role="button" tabindex="0">Help</div>
+        </nav>
     </header>
 
-    <button class="back-btn" onclick="showHub()">← Back to Hub</button>
+    <button class="back-btn" onclick="showHub()" aria-label="Return to hub">← Back to Hub</button>
 
-    <main id="main-content">
+    <main id="main-content" role="main">
         <!-- HUB VIEW -->
-        <div id="hub-view">
+        <div id="hub-view" role="region" aria-label="App hub">
             <div class="welcome-banner">
                 <h2>★ WELCOME TO RETRO WEB HUB ★</h2>
                 <p>Your one-stop destination for awesome 90s-style mini apps!</p>
@@ -743,54 +759,54 @@
                 Visitors: <span class="counter-digits" id="visitor-count">000000</span>
             </div>
 
-            <div class="app-grid">
-                <div class="app-card" onclick="showApp('color')">
-                    <div class="app-icon">🎨</div>
+            <div class="app-grid" role="list" aria-label="Available apps">
+                <div class="app-card" onclick="showApp('color')" role="listitem" tabindex="0" aria-label="Open Color Changer app">
+                    <div class="app-icon" aria-hidden="true">🎨</div>
                     <h3>Color Changer</h3>
                     <p>Random colors</p>
                 </div>
-                <div class="app-card" onclick="showApp('popup')">
-                    <div class="app-icon">🔔</div>
+                <div class="app-card" onclick="showApp('popup')" role="listitem" tabindex="0" aria-label="Open Popup Notify app">
+                    <div class="app-icon" aria-hidden="true">🔔</div>
                     <h3>Popup Notify</h3>
                     <p>Toast messages</p>
                 </div>
-                <div class="app-card" onclick="showApp('countdown')">
-                    <div class="app-icon">⏱️</div>
+                <div class="app-card" onclick="showApp('countdown')" role="listitem" tabindex="0" aria-label="Open Countdown app">
+                    <div class="app-icon" aria-hidden="true">⏱️</div>
                     <h3>Countdown</h3>
                     <p>Event timer</p>
                 </div>
-                <div class="app-card" onclick="showApp('darkmode')">
-                    <div class="app-icon">🌙</div>
+                <div class="app-card" onclick="showApp('darkmode')" role="listitem" tabindex="0" aria-label="Open Theme Toggle app">
+                    <div class="app-icon" aria-hidden="true">🌙</div>
                     <h3>Theme Toggle</h3>
                     <p>Dark/Light mode</p>
                 </div>
-                <div class="app-card" onclick="showApp('calculator')">
-                    <div class="app-icon">🔢</div>
+                <div class="app-card" onclick="showApp('calculator')" role="listitem" tabindex="0" aria-label="Open Calculator app">
+                    <div class="app-icon" aria-hidden="true">🔢</div>
                     <h3>Calculator</h3>
                     <p>Math tool</p>
                 </div>
-                <div class="app-card" onclick="showApp('tictactoe')">
-                    <div class="app-icon">⭕</div>
+                <div class="app-card" onclick="showApp('tictactoe')" role="listitem" tabindex="0" aria-label="Open Tic Tac Toe game">
+                    <div class="app-icon" aria-hidden="true">⭕</div>
                     <h3>Tic Tac Toe</h3>
                     <p>Classic game</p>
                 </div>
-                <div class="app-card" onclick="showApp('memory')">
-                    <div class="app-icon">🧠</div>
+                <div class="app-card" onclick="showApp('memory')" role="listitem" tabindex="0" aria-label="Open Memory Match game">
+                    <div class="app-icon" aria-hidden="true">🧠</div>
                     <h3>Memory Match</h3>
                     <p>Card game</p>
                 </div>
-                <div class="app-card" onclick="showApp('snake')">
-                    <div class="app-icon">🐍</div>
+                <div class="app-card" onclick="showApp('snake')" role="listitem" tabindex="0" aria-label="Open Snake game">
+                    <div class="app-icon" aria-hidden="true">🐍</div>
                     <h3>Snake</h3>
                     <p>Retro classic</p>
                 </div>
-                <div class="app-card" onclick="showApp('typer')">
-                    <div class="app-icon">⌨️</div>
+                <div class="app-card" onclick="showApp('typer')" role="listitem" tabindex="0" aria-label="Open Speed Typer game">
+                    <div class="app-icon" aria-hidden="true">⌨️</div>
                     <h3>Speed Typer</h3>
                     <p>Typing game</p>
                 </div>
-                <div class="app-card" onclick="showApp('reaction')">
-                    <div class="app-icon">⚡</div>
+                <div class="app-card" onclick="showApp('reaction')" role="listitem" tabindex="0" aria-label="Open Reaction Test game">
+                    <div class="app-icon" aria-hidden="true">⚡</div>
                     <h3>Reaction Test</h3>
                     <p>Test reflexes</p>
                 </div>
@@ -833,7 +849,7 @@
                 <div class="window-content">
                     <h2>🔔 Toast Notification System</h2>
                     <p>Click buttons to see different notification types!</p>
-                    <div class="toast-container" id="toast-container"></div>
+                    <div class="toast-container" id="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
                     <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
                         <button class="retro-btn" onclick="showToast('success')">Success</button>
                         <button class="retro-btn" onclick="showToast('error')">Error</button>
