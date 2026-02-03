@@ -13,8 +13,10 @@
         "url": "git+https://github.com/mk-knight23/26-game-retro-vault.git"
     },
     "dependencies": {
+        "cors": "^2.8.5",
         "express": "^4.21.0",
-        "cors": "^2.8.5"
+        "react-router": "^7.13.0",
+        "zustand": "^5.0.11"
     },
     "devDependencies": {
         "vite": "^6.0.0"
