@@ -1,4 +1,7 @@
-/* === 90s RETRO THEME === */
+/* === 90s RETRO THEME - DESIGN SYSTEM: RETRO-FUTURISM === */
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -22,22 +25,29 @@
 }
 
 :root {
-    --bg-primary: #c0c0c0;
+    /* Design System Colors: Retro-Futurism */
+    --color-primary: #18181B;
+    --color-secondary: #3F3F46;
+    --color-cta: #EC4899;
+    --color-background: #FAFAFA;
+    --color-text: #09090B;
+
+    /* Legacy aliases (maintaining compatibility) */
+    --bg-primary: #E8E8E8;
     --bg-secondary: #ffffff;
     --border-light: #dfdfdf;
     --border-dark: #808080;
     --border-darkest: #404040;
-    --highlight: #000080;
-    --text-primary: #000000;
-    --link-blue: #0000ff;
-    --visited-purple: #800080;
-    --win95-title: #000080;
-    --win95-bg: #c0c0c0;
-    --retro-green: #00ff00;
-    --retro-pink: #ff00ff;
-    --retro-cyan: #00ffff;
-    --retro-yellow: #ffff00;
-    --retro-yellow: #ffff00;
+    --highlight: var(--color-cta);
+    --text-primary: var(--color-text);
+    --link-blue: var(--color-cta);
+    --visited-purple: var(--color-secondary);
+    --win95-title: var(--color-primary);
+    --win95-bg: var(--bg-primary);
+    --retro-green: #10B981;
+    --retro-pink: var(--color-cta);
+    --retro-cyan: #06B6D4;
+    --retro-yellow: #F59E0B;
 }
 
 /* === THEME OVERRIDES === */
@@ -133,7 +143,9 @@
 }
 
 body {
-    font-family: 'MS Sans Serif', 'Segoe UI', Tahoma, sans-serif;
+    /* Design System Typography */
+    font-family: 'VT323', 'MS Sans Serif', 'Segoe UI', monospace;
+    font-size: 20px;
     background: var(--bg-primary);
     color: var(--text-primary);
     min-height: 100vh;
@@ -152,7 +164,8 @@ header {
 }
 
 .title-bar {
-    background: linear-gradient(90deg, var(--win95-title), #1084d0);
+    /* Design System: Gradient with primary and CTA */
+    background: linear-gradient(90deg, var(--color-primary), var(--color-cta));
     padding: 4px 8px;
     display: flex;
     justify-content: space-between;
@@ -160,7 +173,9 @@ header {
 }
 
 .title-bar h1 {
-    font-size: 14px;
+    /* Design System: Press Start 2P for headings */
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
     font-weight: bold;
     color: white;
     display: flex;
@@ -171,7 +186,8 @@ header {
 .title-bar-icon {
     width: 16px;
     height: 16px;
-    background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+    /* Design System: CTA color gradient */
+    background: linear-gradient(135deg, var(--color-cta), var(--color-secondary));
     border-radius: 2px;
 }
 
@@ -238,7 +254,8 @@ main {
 }
 
 .welcome-banner {
-    background: linear-gradient(90deg, var(--highlight), #800080);
+    /* Design System: Primary to CTA gradient */
+    background: linear-gradient(90deg, var(--color-primary), var(--color-cta));
     color: white;
     padding: 20px;
     text-align: center;
@@ -247,10 +264,11 @@ main {
 }
 
 .welcome-banner h2 {
-    font-size: 28px;
+    /* Design System: Press Start 2P */
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px;
     text-shadow: 3px 3px 0 #000;
     margin-bottom: 8px;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
 }
 
 .welcome-banner p {
@@ -295,7 +313,12 @@ main {
     padding: 12px;
     cursor: pointer;
     text-align: center;
-    transition: none;
+    transition: all 0.2s ease;
+}
+
+.app-card:hover {
+    border: 2px inset white;
+    background: rgba(236, 72, 153, 0.1);
 }
 
 .app-card:hover {
@@ -319,7 +342,9 @@ main {
 }
 
 .app-card h3 {
-    font-size: 12px;
+    /* Design System: Press Start 2P for headings */
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
     font-weight: bold;
     margin-bottom: 4px;
 }
@@ -346,7 +371,8 @@ main {
 }
 
 .window-title {
-    background: linear-gradient(90deg, var(--win95-title), #1084d0);
+    /* Design System: Primary to CTA gradient */
+    background: linear-gradient(90deg, var(--color-primary), var(--color-cta));
     color: white;
     padding: 4px 8px;
     font-weight: bold;
@@ -354,6 +380,7 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: 'Press Start 2P', cursive;
 }
 
 .window-content {
@@ -363,9 +390,11 @@ main {
 }
 
 .window-content h2 {
-    font-size: 16px;
+    /* Design System: Press Start 2P */
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
     margin-bottom: 12px;
-    color: var(--highlight);
+    color: var(--color-cta);
 }
 
 .window-content p {
@@ -382,6 +411,8 @@ main {
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
+    transition: all 0.2s ease;
+    cursor: pointer;
     font-family: inherit;
 }
 
@@ -390,8 +421,13 @@ main {
 }
 
 .retro-btn.primary {
-    background: #800080;
+    /* Design System: CTA color */
+    background: var(--color-cta);
     color: white;
+}
+
+.retro-btn.primary:hover {
+    filter: brightness(1.1);
 }
 
 /* === COLOR CHANGER === */
@@ -408,9 +444,9 @@ main {
 }
 
 .color-code {
-    font-family: 'Courier New', monospace;
+    font-family: 'VT323', monospace;
     font-size: 18px;
-    color: var(--highlight);
+    color: var(--color-cta);
     margin-top: 8px;
 }
 
@@ -433,22 +469,26 @@ main {
 }
 
 .toast.success {
-    background: #00ff00;
+    /* Design System: Green for success */
+    background: var(--retro-green);
     color: #000;
 }
 
 .toast.error {
-    background: #ff0000;
+    /* Design System: CTA color for error */
+    background: var(--color-cta);
     color: #fff;
 }
 
 .toast.info {
-    background: #ffff00;
+    /* Design System: Yellow for info */
+    background: var(--retro-yellow);
     color: #000;
 }
 
 .toast.warning {
-    background: #ff00ff;
+    /* Design System: Secondary for warning */
+    background: var(--color-secondary);
     color: #fff;
 }
 
@@ -892,4 +932,42 @@ footer a:visited {
     color: var(--retro-red);
     padding: 4px 8px;
     letter-spacing: 4px;
+}
+/* === DESIGN SYSTEM: ACCESSIBILITY IMPROVEMENTS === */
+
+/* Focus states for keyboard navigation */
+.retro-btn:focus-visible,
+.app-card:focus-visible,
+.menu-item:focus-visible,
+.win-btn:focus-visible,
+.back-btn:focus-visible {
+    outline: 3px solid var(--color-cta);
+    outline-offset: 2px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Ensure all clickable elements have cursor pointer */
+.win-btn,
+.menu-item,
+.app-card,
+.back-btn {
+    cursor: pointer;
+}
+
+/* Skip link enhancement */
+.skip-link {
+    background: var(--color-cta);
+    font-weight: bold;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
