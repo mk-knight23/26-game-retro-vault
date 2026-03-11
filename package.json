@@ -4,6 +4,7 @@
     "description": "A curated time capsule of 90s web apps and games.",
     "type": "module",
     "scripts": {
+    "production": "npm run build && npm start",
         "dev": "vite",
         "build": "vite build",
         "serve": "node server/index.js"
